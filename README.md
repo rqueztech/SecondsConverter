@@ -4,5 +4,7 @@ Script that takes input in minute, days, second format and puts out time in seco
 ## File structure
 <ul>
   <li>cmd/</li>                      -> contains all main files
-  <li>cmd/resources/tests.csv</li>   -> contains the csv where you insert all times
+  <ul>
+    <li>cmd/resources/tests.csv</li>   -> contains the csv where you insert all times
+  </ul>
 </ul>
