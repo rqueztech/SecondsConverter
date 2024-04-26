@@ -5,7 +5,7 @@ import (
     "fmt";
 )
 
-func Read CSV() bool {
+func ReadCSV() bool {
      // file variable -> recieves pointer of csv file if found
     // err -> kicks error if this is not found.
     file, err := os.Open("resources/times.csv")
