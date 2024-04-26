@@ -3,9 +3,11 @@ package main
 import (
     "os";
     "fmt";
+    "encoding/csv";
 )
 
-func ReadCSV() bool {
+/*
+func WriteCSV() {
      // file variable -> recieves pointer of csv file if found
     // err -> kicks error if this is not found.
     file, err := os.Open("resources/times.csv")
@@ -13,15 +15,13 @@ func ReadCSV() bool {
     // If the error is not null, meaning an error was found... then print out custom error. er is verbose, so we replace with our own
     if(err != nil) {
         fmt.Println("File Found...")
-        return true
     } else {
         fmt.Println("File Not Found...")
-        return false
     }   
 }
+*/
 
-
-func WriteCSV() bool {
+func ReadCSV() {
      // file variable -> recieves pointer of csv file if found
     // err -> kicks error if this is not found.
     file, err := os.Open("resources/times.csv")
@@ -29,9 +29,18 @@ func WriteCSV() bool {
     // If the error is not null, meaning an error was found... then print out custom error. er is verbose, so we replace with our own
     if(err != nil) {
         fmt.Println("File Found...")
-        return true
     } else {
         fmt.Println("File Not Found...")
-        return false
-    }   
+    }
+
+    reader := csv.NewReader(file)
+ 
+
+    // process ther records
+    for _, record := range records {
+        // process inner fields
+        for _, field := range record {
+            fmt.Println(field)
+        }
+    }
 }
