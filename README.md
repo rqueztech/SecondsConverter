@@ -3,8 +3,8 @@ Script that takes input in minute, days, second format and puts out time in seco
 
 ## File structure
 <ul>
-  <li>## cmd/</li>                      -> contains all main files
+  <li><strong>cmd/</strong></li>                      -> contains all main files
   <ul>
-    <li>## cmd/resources/tests.csv</li>   -> contains the csv where you insert all times
+    <li><strong>cmd/resources/tests.csv</strong></li>   -> contains the csv where you insert all times
   </ul>
 </ul>
