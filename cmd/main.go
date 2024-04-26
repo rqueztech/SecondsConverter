@@ -5,7 +5,12 @@ import (
 )
 
 func main(){
-    ReadCSV()
+    readValues, err := ReadCSV()
     //WriteCSV()
-    fmt.Println("Here we go")
+
+    if err != nil {
+        fmt.Println("CSV not working...")
+    } else {
+        fmt.Println(readValues)
+    }
 }
