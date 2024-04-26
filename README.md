@@ -1,2 +1,8 @@
 # Seconds Converter
-Simple script that takes any range of times in csv format, and returns them as seconds. This will be extended to accept the link desired to stamp as an input.
+Script that takes input in minute, days, second format and puts out time in seconds. Great for custom youtube timestamps.
+
+## File structure
+<ul>
+  <li>cmd/</li>                      -> contains all main files
+  <li>cmd/resources/tests.csv</li>   -> contains the csv where you insert all times
+</ul>
