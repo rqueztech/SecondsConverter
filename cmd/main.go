@@ -5,6 +5,7 @@ import (
 )
 
 func main(){
-    CheckForCSV()
+    ReadCSV()
+    WriteCSV()
     fmt.Println("Here we go")
 }
