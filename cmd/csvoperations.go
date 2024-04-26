@@ -1,6 +1,7 @@
 package main
 
 import (
+    "bytes"
     "os";
     "fmt";
     "encoding/csv";
@@ -21,7 +22,7 @@ func WriteCSV() {
 }
 */
 
-func ReadCSV() {
+func ReadCSV() (string, error) {
      // file variable -> recieves pointer of csv file if found
     // err -> kicks error if this is not found.
     file, err := os.Open("resources/times.csv")
@@ -33,14 +34,28 @@ func ReadCSV() {
         fmt.Println("File Not Found...")
     }
 
-    reader := csv.NewReader(file)
- 
+    // Create buffer to aggregate all input
+    var buffer bytes.Buffer
 
-    // process ther records
-    for _, record := range records {
-        // process inner fields
-        for _, field := range record {
-            fmt.Println(field)
+    // Create the reader to take input
+    reader := csv.NewReader(file)
+
+    // read all of the records  out
+    records, err := reader.ReadAll()
+
+    // do error check
+    if err != nil {
+        fmt.Println(err)
+    } else {
+        // process ther records
+        for _, record := range records {
+            // process inner fields
+            for _, field := range record {
+                buffer.WriteString(field)
+                buffer.WriteString(",")
+            }
         }
     }
+
+    return buffer.String(), nil
 }
