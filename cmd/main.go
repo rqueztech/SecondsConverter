@@ -6,6 +6,6 @@ import (
 
 func main(){
     ReadCSV()
-    WriteCSV()
+    //WriteCSV()
     fmt.Println("Here we go")
 }
