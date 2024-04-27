@@ -8,16 +8,9 @@ import (
     "os";       // for all io operations
 )
 
-// Create main menu for user prompt
-func mainmenu() {
-    fmt.Println("1. Link To Aggregate") 
-    fmt.Println("2. Raw Times")
-    fmt.Println("\nEnter Option: ")
-}
-
 func main(){
-    // print out the main menu here
-    mainmenu()
+
+    fmt.Print("Enter the link name: ")
 
     // Create a builder to compile the seconds
     reader := bufio.NewReader(os.Stdin)
