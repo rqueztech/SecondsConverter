@@ -8,8 +8,11 @@ import (
     "os";       // for all io operations
 )
 
-func main(){
+type Builder struct {
+    strings.Builder
+}
 
+func main(){
     fmt.Print("Enter the link name: ")
 
     // Create a builder to compile the seconds
@@ -35,10 +38,18 @@ func main(){
     }
 
     // split the time values here
-    thisis := strings.Split(readValues, ",")
+    timestosplit := strings.Split(readValues, ",")
 
+    // get the length of times to split
+    timesplitlength := len(timestosplit)
+
+    // make an array at the length of timesplit.
+    writearray := make([]string, timesplitlength)
+
+    currentvalue := 0
+    
     // iterate through every time that was put in the csv
-    for _,currentTime := range thisis {
+    for _,currentTime := range timestosplit {
         // handles extra garbage character at end
         if len(currentTime) > 1 {
             // split the times by colon (:)
@@ -49,11 +60,18 @@ func main(){
             minutes, _ := strconv.Atoi(timesplit[1])
             seconds, _ := strconv.Atoi(timesplit[2])
 
+            // calculate each component to extract the number of seconds
             totalseconds := (hours*3600) + (minutes*60) + (seconds)
 
-            fmt.Printf("<a href = \"%s&t=%ds\"></a>\n", linkname, totalseconds)
+            // write into the array position we created. we need the array to write to a new csv.
+            writearray[currentvalue] = fmt.Sprintf("<a href = \"%s&t=%ds\"></a>", linkname, totalseconds)
+            
+            currentvalue++
         }
     }
 
-    fmt.Println("\nend")
+    // stopping point: array prints right
+    for _, x := range(writearray) {
+        fmt.Println(x)
+    }
 }
