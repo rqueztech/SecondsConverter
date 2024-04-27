@@ -8,10 +8,6 @@ import (
     "os";       // for all io operations
 )
 
-type Builder struct {
-    strings.Builder
-}
-
 func main(){
     fmt.Print("Enter the link name: ")
 
