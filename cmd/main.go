@@ -57,15 +57,17 @@ func main(){
             totalseconds := (hours*3600) + (minutes*60) + (seconds)
 
             // write into the array position we created. we need the array to write to a new csv.
-            writearray[index] = []string{fmt.Sprintf("<a href = \"%s&t=%ds\"></a>", linkname, totalseconds)}
+            writearray[index] = []string{fmt.Sprintf("<a href = \"%s&t=%ds\">\t*YOUR LINK HERE *\t</a>", linkname, totalseconds)}
             
             currentvalue++
         }
     }
 
     // stopping point: array prints right
-    for _, x := range(writearray) {
-        fmt.Println(x)
+    for _, col := range(writearray) {
+        for _, row := range(col) {
+            fmt.Println(row)
+        }
     }
 
     writeCSV(writearray)
