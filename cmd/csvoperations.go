@@ -44,3 +44,25 @@ func ReadCSV() (string) {
 
     return buffer.String()
 }
+
+// function to write to a csv file
+func writeCSV(writearray [][]string) {
+    // Create the file
+    file, err := os.Create("resources/output_times_seconds.csv")
+
+    // check for errors
+    if err != nil {
+        fmt.Println("Error creating file")
+    }
+
+    // Create the writer
+    writer := csv.NewWriter(file)
+
+    // write the records
+    for _, record := range writearray {
+        writer.Write(record)
+    }
+
+    // flush the writer
+    writer.Flush()
+}
