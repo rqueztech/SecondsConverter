@@ -36,16 +36,13 @@ func main(){
     // split the time values here
     timestosplit := strings.Split(readValues, ",")
 
-    // get the length of times to split
-    timesplitlength := len(timestosplit)
-
     // make an array at the length of timesplit.
-    writearray := make([]string, timesplitlength)
+    writearray := make([][]string, len(timestosplit))
 
     currentvalue := 0
     
     // iterate through every time that was put in the csv
-    for _,currentTime := range timestosplit {
+    for index,currentTime := range timestosplit {
         // handles extra garbage character at end
         if len(currentTime) > 1 {
             // split the times by colon (:)
@@ -60,7 +57,7 @@ func main(){
             totalseconds := (hours*3600) + (minutes*60) + (seconds)
 
             // write into the array position we created. we need the array to write to a new csv.
-            writearray[currentvalue] = fmt.Sprintf("<a href = \"%s&t=%ds\"></a>", linkname, totalseconds)
+            writearray[index] = []string{fmt.Sprintf("<a href = \"%s&t=%ds\"></a>", linkname, totalseconds)}
             
             currentvalue++
         }
@@ -70,4 +67,6 @@ func main(){
     for _, x := range(writearray) {
         fmt.Println(x)
     }
+
+    writeCSV(writearray)
 }
