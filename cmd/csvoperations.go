@@ -7,10 +7,10 @@ import (
     "encoding/csv";
 )
 
-func ReadCSV() (string) {
+func ReadCSV(times_csv string) (string) {
      // file variable -> recieves pointer of csv file if found
     // err -> kicks error if this is not found.
-    file, err := os.Open("resources/times.csv")
+    file, err := os.Open(times_csv)
 
     // If the error is not null, meaning an error was found... then print out custom error. er is verbose, so we replace with our own
     if(err != nil) {
