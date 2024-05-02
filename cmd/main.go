@@ -8,12 +8,18 @@ import (
     "os";       // for all io operations
 )
 
-func timesplitter(linkname string, timestosplit []string) [][]string { 
-    writearray := make([][]string, len(timestosplit))
-    currentvalue := 0
+type Builder struct {
+    strings.Builder
+}
+
+func (builder *Builder) timesplitter(linkname string, timestosplit []string) [][]string { 
+    var writearray [][]string = make([][]string, len(timestosplit))
+    var currentvalue int = 0
 
     // iterate through every time that was put in the csv
     for index,currentTime := range timestosplit {
+        var builder Builder
+
         // handles extra garbage character at end
         if len(currentTime) > 1 {
             // split the times by colon (:)
@@ -25,11 +31,19 @@ func timesplitter(linkname string, timestosplit []string) [][]string {
             seconds, _ := strconv.Atoi(timesplit[2])
 
             // calculate each component to extract the number of seconds
-            totalseconds := (hours*3600) + (minutes*60) + (seconds)
+            var totalseconds int = (hours*3600) + (minutes*60) + (seconds)
+
+            var totalsecondstring = strconv.Itoa(totalseconds)
 
             // write into the array position we created. we need the array to write to a new csv.
-            writearray[index] = []string{fmt.Sprintf("<a href = \"%s&t=%ds\">\t*YOUR LINK HERE *\t</a>", linkname, totalseconds)}
+            builder.WriteString("<a href = \"")
+            builder.WriteString(linkname)
+            builder.WriteString("&t=")
+            builder.WriteString(totalsecondstring)
+            builder.WriteString("\">")
             
+            writearray[index] = []string{builder.String(), "Your Link Here", "</a>"}
+
             currentvalue++
         }
     }
@@ -50,6 +64,7 @@ func displayarray(writearray [][]string) {
 
 func main(){
     var times_csv string = "resources/times.csv"
+    var builder Builder
 
     fmt.Print("Enter the link name: ")
 
@@ -79,7 +94,7 @@ func main(){
     var timestosplit []string = strings.Split(readValues, ",")
 
     // make an array at the length of timesplit.
-    var writearray [][]string = timesplitter(linkname, timestosplit)
+    var writearray [][]string = builder.timesplitter(linkname, timestosplit)
 
     displayarray(writearray)
 }
