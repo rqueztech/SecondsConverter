@@ -1,7 +1,7 @@
 package main
 
 import (
-    "bytes"
+    "strings";
     "os";
     "fmt";
     "encoding/csv";
@@ -19,8 +19,8 @@ func ReadCSV(times_csv string) (string) {
         fmt.Println("File Found...")
     }
 
-    // Create buffer to aggregate all input
-    var buffer bytes.Buffer
+    // Create builder to aggregate all input
+    var builder strings.Builder
 
     // Create the reader to take input
     reader := csv.NewReader(file)
@@ -36,13 +36,13 @@ func ReadCSV(times_csv string) (string) {
         for _, record := range records {
             // process inner fields
             for _, field := range record {
-                buffer.WriteString(field)
-                buffer.WriteString(",")
+                builder.WriteString(field)
+                builder.WriteString(",")
             }
         }
     }
 
-    return buffer.String()
+    return builder.String()
 }
 
 // function to write to a csv file
