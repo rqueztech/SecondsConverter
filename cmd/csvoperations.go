@@ -55,6 +55,7 @@ func writeCSV(writearray [][]string) {
         fmt.Println("Error creating file")
     }
 
+    defer file.Close()
     // Create the writer
     writer := csv.NewWriter(file)
 
