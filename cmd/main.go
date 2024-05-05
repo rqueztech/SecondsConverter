@@ -16,6 +16,7 @@ func (builder *Builder) timesplitter(linkname string, timestosplit []string) [][
     var writearray [][]string = make([][]string, len(timestosplit))
     var currentvalue int = 0
 
+
     // iterate through every time that was put in the csv
     for index,currentTime := range timestosplit {
         var builder Builder
@@ -24,6 +25,8 @@ func (builder *Builder) timesplitter(linkname string, timestosplit []string) [][
         if len(currentTime) > 1 {
             // split the times by colon (:)
             timesplit := strings.Split(currentTime, ":")
+
+            var timesplitlength int = len(timesplit)
 
             // convert the 3 inputs into hours, minutes, and seconds
             hours, _ := strconv.Atoi(timesplit[0])
@@ -36,13 +39,17 @@ func (builder *Builder) timesplitter(linkname string, timestosplit []string) [][
             var totalsecondstring = strconv.Itoa(totalseconds)
 
             // write into the array position we created. we need the array to write to a new csv.
-            builder.WriteString("<a href = \"")
+            builder.WriteString("<a href = https://www.")
             builder.WriteString(linkname)
             builder.WriteString("&t=")
             builder.WriteString(totalsecondstring)
             builder.WriteString("\">")
-            
-            writearray[index] = []string{builder.String(), "Your Link Here", "</a>"}
+
+            if timesplitlength < 3 {
+                writearray[index] = []string {builder.String(), "</a>"};
+            } else {
+                writearray[index] = []string {builder.String(), timesplit[3], "</a>"};
+            }
 
             currentvalue++
         }
